@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Young+Serif&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+.attribution {
+  position: fixed;
+  font-size: 11px;
+  text-align: center;
+  bottom: 10px;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
+body {
+  background-color: hsl(30, 54%, 90%);
+  margin: 0;
+  color: hsl(30, 10%, 34%);
+  font-family: "Outfit", sans-serif;
+  font-size: 16px;
+}
+
+h1,
+h2 {
+  font-family: "Young Serif", serif;
+  font-weight: 100;
+}
+main {
+  background-color: hsl(0, 0%, 100%);
+  padding: 30px;
+  border-radius: 20px;
+  width: 650px;
+  max-width: 100%;
+  margin: 3rem auto;
+}
+.heading img {
+  width: 100%;
+  border-radius: 10px;
+}
+.heading h1 {
+  color: hsl(0, 0%, 0%);
+}
+
+.prep-card {
+  padding: 10px;
+  border-radius: 10px;
+  background: hsl(330, 100%, 98%);
+}
+.prep-card h3 {
+  margin: 10px;
+  color: hsl(332, 51%, 32%);
+}
+.prep-card ul li:not(:last-child) {
+  margin-bottom: 8px;
+}
+.prep-card ul li::marker {
+  color: hsl(332, 51%, 32%);
+}
+
+h2 {
+  color: hsl(14, 45%, 36%);
+}
+.ingredients ul li:not(:last-child) {
+  margin-bottom: 8px;
+}
+.ingredients ul li::marker {
+  color: hsl(14, 45%, 36%);
+}
+
+.instructions ol li:not(:last-child) {
+  margin-bottom: 15px;
+}
+.instructions ol li::marker {
+  color: hsl(14, 45%, 36%);
+  font-weight: bold;
+}
+.nutrition table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.nutrition th {
+  text-align: left;
+  font-weight: 500;
+  padding: 10px;
+}
+
+.nutrition td {
+  text-align: center;
+  font-weight: 600;
+}
+.nutrition tr + tr {
+  border-top: 1px solid #ddd;
+}
+.value {
+  color: hsl(14, 45%, 36%);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid hsl(30, 18%, 87%);
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 600px) {
+  main {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+  }
+  .heading img {
+    border-radius: 0;
+  }
+  .heading h1,
+  .heading p,
+  .ingredients,
+  .instructions,
+  .nutrition {
+    padding: 0 40px 0 40px;
+  }
+  .prep-card {
+    margin: 0 40px 0 40px;
+  }
+  hr {
+    margin: 1.5rem 2rem;
+  }
+}
