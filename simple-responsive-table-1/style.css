@@ -1,0 +1,66 @@
+body {
+    font-size: 1.125rem;
+    font-family: system-ui;
+    line-height: 1.5;
+}
+
+.wrapper{
+    width: min(900px, 100% - 3rem);
+    margin-inline: auto;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background: #e0f2f1;
+}
+
+th,
+td{
+    padding: 1rem;
+    text-align: center;
+}
+
+caption{
+    background-color: #009688;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+th{
+    background-color: #80cbc4;
+}
+
+tr:nth-of-type(2n){
+    background-color: #b2dfdb;
+}
+
+@media(max-width:650px){
+    th{
+        display: none;
+    }
+
+    td{
+        display: grid;
+        /* 20 characters space for table data */
+        grid-template-columns: 20ch auto;
+        padding: 0.5rem 1rem;
+        text-align: left;
+    }
+
+    td::before{
+        content: attr(data-cell) " : ";
+        font-weight: 700;
+        text-transform: capitalize;
+    }
+
+    td:first-child{
+        padding-top: 1rem;
+    }
+
+    td:last-child{
+        padding-bottom: 1rem;
+    }
+}

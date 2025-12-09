@@ -60,9 +60,12 @@
       }
       .card img {
         width: 100%;
-        height: auto;
+        aspect-ratio: 16/9;
+        object-fit: cover;
         border-radius: 8px;
         display: block;
+        /* Fallback for older browsers that don't support aspect-ratio */
+        max-height: 240px;
       }
       .card h3 {
         margin: 0;
@@ -74,7 +77,7 @@
         font-size: 13px;
         line-height: 1.3;
       }
-      .card a {
+      .card a.view-link {
         display: inline-block;
         margin-top: 8px;
         padding: 8px 12px;
@@ -95,6 +98,15 @@
           padding: 20px;
         }
       }
+      /* small helper for no-JS fallback message */
+      .no-js-msg {
+        padding: 12px;
+        background: #fff6f6;
+        border: 1px solid #ffdede;
+        color: #7a1f1f;
+        border-radius: 8px;
+        font-size: 13px;
+      }
     </style>
   </head>
   <body>
@@ -110,65 +122,14 @@
       </header>
 
       <main>
-        <section class="grid">
-          <article class="card">
-            <a href="./recipe-page/index.html">
-              <img
-                src="./recipe-page/preview.jpg"
-                alt="Blog Preview Card preview"
-              />
-            </a>
-            <h3>Recipe Page</h3>
-            <p>
-              A simple responsive card showing a Recipe Page — Frontend Mentor
-              challenge.
-            </p>
-            <a href="./recipe-page/index.html">View project</a>
-          </article>
-          <article class="card">
-            <a href="./social-links-profile/index.html">
-              <img
-                src="./social-links-profile/preview.jpg"
-                alt="Blog Preview Card preview"
-              />
-            </a>
-            <h3>Social Links Profile</h3>
-            <p>
-              A simple responsive card showing a Social Links Profile — Frontend
-              Mentor challenge.
-            </p>
-            <a href="./social-links-profile/index.html">View project</a>
-          </article>
-
-          <article class="card">
-            <a href="./blog-preview-card/index.html">
-              <img
-                src="./blog-preview-card/preview.jpg"
-                alt="Blog Preview Card preview"
-              />
-            </a>
-            <h3>Blog Preview Card</h3>
-            <p>
-              A simple responsive card showing a Blog Preview — Frontend Mentor
-              challenge.
-            </p>
-            <a href="./blog-preview-card/index.html">View project</a>
-          </article>
-
-          <article class="card">
-            <a href="./qr-code-component/index.html">
-              <img
-                src="./qr-code-component/preview.jpg"
-                alt="QR Code Component preview"
-              />
-            </a>
-            <h3>QR Code Component</h3>
-            <p>
-              A simple responsive card showing a QR code — Frontend Mentor
-              challenge.
-            </p>
-            <a href="./qr-code-component/index.html">View project</a>
-          </article>
+        <!-- grid will be populated from JS -->
+        <section class="grid" id="projects-grid">
+          <noscript>
+            <div class="no-js-msg">
+              JavaScript is disabled — enable JavaScript or view the repository to
+              see all project cards.
+            </div>
+          </noscript>
         </section>
       </main>
 
@@ -177,5 +138,149 @@
         project.
       </footer>
     </div>
+
+    <script type="module">
+      // Data for the project cards
+      // Keep paths relative to this file so the previews and links work as before.
+      const projects = [
+        {
+          title: "Recipe Page",
+          description:
+            "A simple responsive card showing a Recipe Page — Frontend Mentor challenge.",
+          href: "./recipe-page/index.html",
+          img: "./recipe-page/preview.jpg",
+          alt: "Recipe Page preview"
+        },
+        {
+          title: "Social Links Profile",
+          description:
+            "A simple responsive card showing a Social Links Profile — Frontend Mentor challenge.",
+          href: "./social-links-profile/index.html",
+          img: "./social-links-profile/preview.jpg",
+          alt: "Social Links Profile preview"
+        },
+        {
+          title: "Blog Preview Card",
+          description:
+            "A simple responsive card showing a Blog Preview — Frontend Mentor challenge.",
+          href: "./blog-preview-card/index.html",
+          img: "./blog-preview-card/preview.jpg",
+          alt: "Blog Preview Card preview"
+        },
+        {
+          title: "QR Code Component",
+          description:
+            "A simple responsive card showing a QR code — Frontend Mentor challenge.",
+          href: "./qr-code-component/index.html",
+          img: "./qr-code-component/preview.jpg",
+          alt: "QR Code Component preview"
+        },
+        {
+          title: "React Nav Bar 1",
+          description: "A Responsive Nav bar — challenge.",
+          href: "https://codesandbox.io/p/sandbox/reactjs-navbar-1-jnfktf",
+          img: "./codePen/Navbar1.png",
+          alt: "Navbar preview"
+        },
+        {
+          title: "React Nav Bar 2",
+          description: "A Responsive Nav bar — challenge.",
+          href: "https://codesandbox.io/p/sandbox/reactjs-navbar-2-4wmhv6",
+          img: "./codePen/Navbar2.png",
+          alt: "Navbar preview"
+        },
+        {
+          title: "Video Carousel",
+          description: "A simple video-carousel — challenge.",
+          href: "./video-carousel/Video-Carousel.html",
+          img: "./video-carousel/video-carousel.png",
+          alt: "Video Carousel preview"
+        },
+        {
+          title: "Simple Responsive Table",
+          description:
+            "A simple responsive card showing a Simple Responsive Table — challenge.",
+          href: "./simple-responsive-table-1/index.html",
+          img: "./simple-responsive-table-1/simple-responsive-table-1.png",
+          alt: "Simple Responsive Table preview"
+        },
+        {
+          title: "HTML Login Page",
+          description:
+            "A simple responsive card showing a Login Page — Frontend Mentor challenge.",
+          href: "./html-login-page/index.html",
+          img: "./html-login-page/html-login-page.png",
+          alt: "HTML Login Page preview"
+        }
+      ];
+
+      // Reference to the grid container
+      const grid = document.getElementById("projects-grid");
+
+      // Utility: build a single card element
+      function buildCard(p) {
+        const article = document.createElement("article");
+        article.className = "card";
+
+        const linkWrap = document.createElement("a");
+        linkWrap.href = p.href;
+        // Provide an accessible label for the image link
+        linkWrap.setAttribute("aria-label", `${p.title} — open project`);
+
+        const img = document.createElement("img");
+        img.src = p.img;
+        img.alt = p.alt || p.title;
+        img.loading = "lazy";
+        // keep image styling from CSS
+
+        linkWrap.appendChild(img);
+
+        const h3 = document.createElement("h3");
+        h3.textContent = p.title;
+
+        const desc = document.createElement("p");
+        desc.textContent = p.description;
+
+        const cta = document.createElement("a");
+        cta.href = p.href;
+        cta.textContent = "View project";
+        cta.className = "view-link";
+
+        article.appendChild(linkWrap);
+        article.appendChild(h3);
+        article.appendChild(desc);
+        article.appendChild(cta);
+
+        return article;
+      }
+
+      // Render all projects into the grid
+      function renderProjects(list) {
+        // Clear existing children except <noscript> (if present)
+        // We'll remove all children and re-add the noscript if needed.
+        grid.innerHTML = "";
+
+        if (!Array.isArray(list) || list.length === 0) {
+          const msg = document.createElement("div");
+          msg.className = "no-js-msg";
+          msg.textContent = "No projects available.";
+          grid.appendChild(msg);
+          return;
+        }
+
+        const fragment = document.createDocumentFragment();
+        for (const p of list) {
+          fragment.appendChild(buildCard(p));
+        }
+        grid.appendChild(fragment);
+      }
+
+      // Kick off rendering after DOM is ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => renderProjects(projects));
+      } else {
+        renderProjects(projects);
+      }
+    </script>
   </body>
 </html>
